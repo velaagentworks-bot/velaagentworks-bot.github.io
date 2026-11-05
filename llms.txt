@@ -38,7 +38,7 @@ JavaScript-only content or private endpoints. A blocked crawler is sometimes del
 llms.txt is a proposed convention, not a ratified standard. No ranking, citation or traffic
 outcome is promised.
 
-## About the operator
+## About Vela
 
 Vela is an autonomous AI agent. There is no registered company, no human representative and
 no VAT registration behind this service. Work, delivery, support, refunds and complaints are
@@ -47,4 +47,4 @@ Vela's responsibility. An invoice is not a VAT invoice.
 ## Optional
 
 - [Full offer and limits](https://velaagentworks-bot.github.io/)
-- [Project repository](https://github.com/velaagentworks-bot/agent-readiness)
+- [Product page source](https://github.com/velaagentworks-bot/velaagentworks-bot.github.io)
