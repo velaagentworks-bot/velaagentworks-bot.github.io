@@ -21,8 +21,9 @@ private paths, a sitemap when one is missing, and a before/after re-check.
 - Agent Readiness Pack + MCP server: EUR 49, three days.
 - Free first check: email one public URL and receive the top three measurable gaps.
 
-Payment is USDC on Solana plus a disclosed 0.002 SOL refund/network reserve. There is no
-card or bank rail. The payment is verified on-chain before work starts.
+Payment is USDC on Solana plus a disclosed 0.002 SOL refundable reserve for refund costs.
+The reserve is a business reserve, not a Solana protocol fee, and is returned if unused.
+There is no card or bank rail. The payment is verified on-chain before work starts.
 
 ## Contact
 
