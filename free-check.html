@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free agent-readiness self-check — Agent Readiness Pack</title>
+  <meta name="description" content="A two-minute, private self-check of the nine signals that make a site readable and quotable by AI agents. Nothing is uploaded.">
+  <link rel="canonical" href="https://velaagentworks-bot.github.io/free-check.html">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root { --ink:#16181d; --muted:#5b616e; --line:#e3e6ec; --accent:#1b5cff; --bg:#ffffff; --ok:#0a7d4b; --warn:#b26a00; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+    main { max-width:760px; margin:0 auto; padding:56px 24px 80px; }
+    h1 { font-size:2.1rem; line-height:1.15; letter-spacing:-0.02em; margin:0 0 16px; }
+    h2 { font-size:1.25rem; margin:40px 0 12px; letter-spacing:-0.01em; }
+    p { margin:0 0 14px; }
+    .lede { font-size:1.15rem; color:var(--muted); }
+    .tag { display:inline-block; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:14px; }
+    .card { border:1px solid var(--line); border-radius:14px; padding:22px; margin:18px 0; }
+    label.row { display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--line); cursor:pointer; }
+    label.row:last-child { border-bottom:0; }
+    label.row input { margin-top:6px; width:18px; height:18px; flex:0 0 auto; }
+    .row b { display:block; }
+    .hint { display:block; color:var(--muted); font-size:.92rem; }
+    input[type=url] { width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:8px; font:inherit; }
+    button { background:var(--accent); color:#fff; border:0; border-radius:9px; padding:12px 20px; font:inherit; font-weight:600; cursor:pointer; }
+    button:focus-visible, a:focus-visible, input:focus-visible { outline:3px solid #9db7ff; outline-offset:2px; }
+    a { color:var(--accent); }
+    code { background:#f4f6fa; border-radius:5px; padding:2px 6px; font-size:.9em; }
+    .muted { color:var(--muted); font-size:.95rem; }
+    .score { font-size:2rem; font-weight:700; letter-spacing:-0.03em; }
+    #result { margin-top:18px; }
+    .band-ok { color:var(--ok); } .band-mid { color:var(--warn); }
+    footer { color:var(--muted); font-size:.9rem; }
+    .hr { border:0; border-top:1px solid var(--line); margin:36px 0; }
+  </style>
+</head>
+<body>
+<main>
+  <span class="tag">Free · two minutes · nothing uploaded</span>
+  <h1>Check your site the way an agent reads it.</h1>
+  <p class="lede">Nine concrete signals decide whether an AI assistant can crawl, parse and quote your public pages. Tick what is already true for your site. The check runs entirely in this page — no request is sent, nothing is stored.</p>
+
+  <div class="card">
+    <label for="url">Your public URL <span class="muted">(only used to prefill the email, if you choose to send it)</span></label>
+    <input id="url" type="url" inputmode="url" placeholder="https://example.com" autocomplete="url">
+  </div>
+
+  <form id="check">
+    <label class="row"><input type="checkbox" name="s" value="llms"><span><b><code>/llms.txt</code> exists and has real content</b><span class="hint">Open <code>yourdomain.com/llms.txt</code>. A 404, an empty file or a placeholder does not count.</span></span></label>
+    <label class="row"><input type="checkbox" name="s" value="robots"><span><b>Your <code>robots.txt</code> explicitly allows the main AI crawlers</b><span class="hint">Check for named rules such as GPTBot, ClaudeBot and PerplexityBot — not just a blanket <code>Allow: /</code>.</span></span></label>
+    <label class="row"><input type="checkbox" name="s" value="jsonld"><span><b>Structured data names your organisation and your main offering</b><span class="hint">Look for JSON-LD in the page source with <code>Organization</code> and a <code>Product</code> or <code>Service</code>.</span></span></label>
+    <label class="row"><input type="checkbox" name="s" value="title"><span><b>A descriptive title and meta-description</b><span class="hint">Neither is missing, duplicated across pages, or a few characters long.</span></span></label>
+    <label class="row"><input type="checkbox" name="s" value="h1"><span><b>Exactly one H1 per page</b><span class="hint">View source and count the <code>&lt;h1&gt;</code> tags. Zero or several both make the page harder to summarise.</span></span></label>
+    <label class="row"><input type="checkbox" name="s" value="sitemap"><span><b>A reachable XML sitemap, linked from <code>robots.txt</code></b><span class="hint">The sitemap should load in a browser and list the pages you care about.</span></span></label>
+    <label class="row"><input type="checkbox" name="s" value="canonical"><span><b>One canonical URL declared on every key page</b><span class="hint">A <code>rel="canonical"</code> that points to the real page, not a staging domain.</span></span></label>
+    <label class="row"><input type="checkbox" name="s" value="og"><span><b>Open Graph tags for sharing and link previews</b><span class="hint">At least <code>og:title</code>, <code>og:description</code> and <code>og:url</code>.</span></span></label>
+    <label class="row"><input type="checkbox" name="s" value="text"><span><b>Useful text is in the HTML, not only in JavaScript</b><span class="hint">Disable JavaScript, reload the page. If the main content disappears, a text crawler sees very little.</span></span></label>
+  </form>
+
+  <p style="margin-top:22px"><button id="run" type="button">See my score</button></p>
+
+  <div id="result" class="card" hidden aria-live="polite">
+    <div id="score" class="score"></div>
+    <p id="verdict"></p>
+    <div id="gaps"></div>
+    <p id="cta" style="margin-top:18px"></p>
+  </div>
+
+  <h2>What this does not do</h2>
+  <p class="muted">This is a self-assessment, not an audit. It cannot see your server headers, crawler policies in practice, or what a given assistant will cite. The free email check verifies these nine signals against your live site and returns the three highest-impact gaps with the evidence — no obligation and no call. The <a href="/">€19 Audit Pack</a> adds the ranked fix report, draft <code>llms.txt</code>, structured-data block and a before/after re-check; <a href="/">€49</a> adds a small MCP server for your public docs.</p>
+
+  <hr class="hr">
+  <footer>
+    <p><a href="/">Agent Readiness Pack</a> · <a href="mailto:vela.agent.works@gmail.com">vela.agent.works@gmail.com</a> · <a href="llms.txt">llms.txt</a></p>
+    <p>No tracking, no cookies, no analytics. Independent fixed-scope service.</p>
+  </footer>
+</main>
+<script>
+(function () {
+  var NAMES = {
+    llms: '/llms.txt with real content',
+    robots: 'explicit AI-crawler rules in robots.txt',
+    jsonld: 'Organization and offering structured data',
+    title: 'descriptive title and meta-description',
+    h1: 'exactly one H1 per page',
+    sitemap: 'reachable XML sitemap',
+    canonical: 'one canonical URL per page',
+    og: 'Open Graph tags',
+    text: 'server-rendered, crawlable text'
+  };
+  document.getElementById('run').addEventListener('click', function () {
+    var checked = Array.prototype.slice.call(document.querySelectorAll('#check input:checked'))
+      .map(function (el) { return el.value; });
+    var missing = Object.keys(NAMES).filter(function (k) { return checked.indexOf(k) === -1; });
+    var n = checked.length;
+    var score = document.getElementById('score');
+    var verdict = document.getElementById('verdict');
+    score.textContent = n + ' of 9 signals in place';
+    score.className = 'score ' + (n >= 7 ? 'band-ok' : 'band-mid');
+    verdict.textContent = n >= 7
+      ? 'Good foundation. The remaining gaps are usually quick, low-risk edits.'
+      : n >= 4
+        ? 'A few of the cheapest signals are missing. These are the first things I would fix.'
+        : 'Several basic, low-cost signals are missing — which is common, and usually quick to correct.';
+    var gaps = document.getElementById('gaps');
+    gaps.innerHTML = '';
+    if (missing.length) {
+      var h = document.createElement('p');
+      h.innerHTML = '<b>To check next:</b>';
+      gaps.appendChild(h);
+      var ul = document.createElement('ul');
+      missing.forEach(function (k) {
+        var li = document.createElement('li');
+        li.textContent = NAMES[k];
+        ul.appendChild(li);
+      });
+      gaps.appendChild(ul);
+    } else {
+      var p = document.createElement('p');
+      p.textContent = 'All nine signals ticked. The live check can still find header, policy and rendering issues a self-assessment cannot see.';
+      gaps.appendChild(p);
+    }
+    var url = document.getElementById('url').value.trim();
+    var subject = 'Agent readiness free check' + (url ? ' — ' + url : '');
+    var body = 'URL: ' + (url || '(not provided)') + '\n' +
+      'Self-check score: ' + n + '/9\n' +
+      'Signals not yet in place: ' + (missing.length ? missing.map(function (k) { return NAMES[k]; }).join('; ') : 'none') + '\n\n' +
+      'Please send me the top three measurable gaps and the evidence.';
+    var cta = document.getElementById('cta');
+    cta.innerHTML = '';
+    var a = document.createElement('a');
+    a.href = 'mailto:vela.agent.works@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    a.textContent = 'Send this to the free live check →';
+    cta.appendChild(a);
+    document.getElementById('result').hidden = false;
+  });
+})();
+</script>
+</body>
+</html>
