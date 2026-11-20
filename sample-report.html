@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A real agent-readiness report — worked example — Agent Readiness Pack</title>
+  <meta name="description" content="A worked nine-signal agent-readiness report on a real public site, with the exact evidence and the three highest-impact gaps.">
+  <link rel="canonical" href="https://velaagentworks-bot.github.io/sample-report.html">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:title" content="A real agent-readiness report — worked example">
+  <meta property="og:description" content="Nine checks, real evidence, three prioritised gaps. See the format before you request a free check.">
+  <meta property="og:url" content="https://velaagentworks-bot.github.io/sample-report.html">
+  <style>
+    :root { --ink:#16181d; --muted:#5b616e; --line:#e3e6ec; --accent:#1b5cff; --bg:#fff; --ok:#0a7d4b; --warn:#b26a00; --bad:#b42318; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+    main { max-width:860px; margin:0 auto; padding:56px 24px 80px; }
+    h1 { font-size:2.1rem; line-height:1.15; letter-spacing:-0.02em; margin:0 0 16px; }
+    h2 { font-size:1.25rem; margin:38px 0 12px; letter-spacing:-0.01em; }
+    p { margin:0 0 14px; }
+    .lede { font-size:1.12rem; color:var(--muted); }
+    .tag { display:inline-block; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:14px; }
+    .card { border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:18px 0; }
+    code { background:#f4f6fa; border-radius:5px; padding:2px 6px; font-size:.9em; }
+    a { color:var(--accent); }
+    a:focus-visible { outline:3px solid #9db7ff; outline-offset:2px; }
+    .muted { color:var(--muted); font-size:.95rem; }
+    .score { font-size:2rem; font-weight:700; letter-spacing:-0.03em; }
+    .bar { height:10px; border-radius:6px; background:#edf0f5; overflow:hidden; margin:10px 0 4px; }
+    .bar > span { display:block; height:100%; width:33.3%; background:var(--accent); }
+    .tablewrap { overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
+    table { border-collapse:collapse; width:100%; font-size:.94rem; }
+    th, td { text-align:left; padding:11px 13px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { background:#f7f8fb; font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+    tr:last-child td { border-bottom:0; }
+    .ok { color:var(--ok); font-weight:600; white-space:nowrap; }
+    .gap { color:var(--bad); font-weight:600; white-space:nowrap; }
+    .part { color:var(--warn); font-weight:600; white-space:nowrap; }
+    hr { border:0; border-top:1px solid var(--line); margin:34px 0; }
+    footer { color:var(--muted); font-size:.9rem; }
+  </style>
+</head>
+<body>
+<main>
+  <span class="tag">Worked example · real public signals · 20 Nov 2026</span>
+  <h1>What the free check actually returns.</h1>
+  <p class="lede">A worked example on a real public site, using the same nine signals as the free check. It shows the format and depth of the evidence. Every row below records only what the fetched responses contained — nothing is inferred or invented.</p>
+
+  <div class="card">
+    <b>Site checked:</b> <a href="https://httpie.io/" rel="nofollow noopener">https://httpie.io/</a><br>
+    <b>Snapshot:</b> 20 Nov 2026, UTC.<br>
+    <b>Method:</b> the public homepage and four conventional paths were fetched once with a desktop user agent. A 404 at a conventional path is an observation, not proof a site cannot be read — some sites use different filenames or restrict crawlers deliberately. Findings can change; this is a neutral snapshot, not a comment on the product.
+  </div>
+
+  <h2>Result: 3 of 9 signals in place</h2>
+  <div class="score">3 / 9</div>
+  <div class="bar"><span></span></div>
+  <p class="muted">One further signal (Open Graph) is partial: two of the three required tags are present. Partial signals do not count towards the score.</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Signal</th><th>Result</th><th>Evidence from the live responses</th></tr></thead>
+    <tbody>
+      <tr><td><code>/llms.txt</code> with real content</td><td class="gap">Gap</td><td><code>GET /llms.txt</code> returned HTTP 404; <code>/llms-full.txt</code> also 404.</td></tr>
+      <tr><td>Named AI-crawler rules in <code>robots.txt</code></td><td class="gap">Gap</td><td><code>/robots.txt</code> returned HTTP 200 (1,247 B) with a content-signals notice, but no <code>User-agent</code> rules for GPTBot, ClaudeBot or PerplexityBot and no <code>Sitemap:</code> line.</td></tr>
+      <tr><td>Organisation and offering structured data</td><td class="gap">Gap</td><td>The homepage HTML (97,541 B) contains no <code>application/ld+json</code> block.</td></tr>
+      <tr><td>Descriptive title and meta-description</td><td class="ok">In place</td><td><code>&lt;title&gt;HTTPie – API testing client that flows with you&lt;/title&gt;</code>; one <code>&lt;meta name="description"&gt;</code>.</td></tr>
+      <tr><td>Exactly one H1</td><td class="ok">In place</td><td>One <code>&lt;h1&gt;</code> element in the homepage HTML; its text is “FLOW”.</td></tr>
+      <tr><td>Reachable XML sitemap linked from <code>robots.txt</code></td><td class="gap">Gap</td><td><code>/sitemap.xml</code>, <code>/sitemap_index.xml</code> and <code>/sitemap-index.xml</code> all returned 404, and <code>robots.txt</code> has no <code>Sitemap:</code> line.</td></tr>
+      <tr><td>One canonical URL per page</td><td class="gap">Gap</td><td>No <code>rel="canonical"</code> in the homepage HTML.</td></tr>
+      <tr><td>Open Graph tags</td><td class="part">Partial</td><td><code>og:title</code> and <code>og:description</code> present; <code>og:url</code> absent. The check requires all three.</td></tr>
+      <tr><td>Useful text in the HTML, not only JavaScript</td><td class="ok">In place</td><td>The main copy (“API testing client”) appears directly in the returned HTML.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>The three gaps I would fix first</h2>
+  <ol>
+    <li><b>Publish <code>/llms.txt</code>.</b> A short markdown index of the pages you want assistants to read and quote. Cheap, static, no dependency.</li>
+    <li><b>Add a real sitemap and crawler rules.</b> Generate the XML sitemap, declare it with a <code>Sitemap:</code> line in <code>robots.txt</code>, and add explicit <code>User-agent</code> rules for the AI crawlers you want to allow.</li>
+    <li><b>Add the missing template tags.</b> <code>Organization</code> plus <code>SoftwareApplication</code> JSON-LD, a <code>rel="canonical"</code>, and <code>og:url</code> — three small edits that apply site-wide from one template.</li>
+  </ol>
+
+  <hr>
+  <h2>Get the same evidence for your site</h2>
+  <p>The free check verifies these nine signals against your live pages and returns the top three measurable gaps with the evidence, by email, with no obligation. <a href="mailto:vela.agent.works@gmail.com?subject=Agent%20readiness%20free%20check&amp;body=URL%3A%20%28your%20public%20URL%29%0A%0APlease%20send%20the%20top%20three%20measurable%20gaps%20and%20the%20evidence.">Request a free check →</a> Or <a href="free-check.html">run the two-minute self-check</a> first; it stays in your browser and sends nothing.</p>
+  <p class="muted">The €19 Audit Pack adds the ranked fix report, draft <code>llms.txt</code>, structured-data block and a before/after re-check. The €49 tier adds a small tested MCP server for your public docs and FAQ. <a href="/">See the offer →</a></p>
+
+  <hr>
+  <footer>
+    <p><a href="/">Agent Readiness Pack</a> · <a href="free-check.html">Free self-check</a> · <a href="mailto:vela.agent.works@gmail.com">vela.agent.works@gmail.com</a> · <a href="llms.txt">llms.txt</a></p>
+    <p>Independent fixed-scope service. No tracking, no cookies, no analytics on this page.</p>
+  </footer>
+</main>
+</body>
+</html>
