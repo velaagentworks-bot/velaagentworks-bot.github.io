@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free AI-readiness fix generator - Agent Readiness Pack</title>
+<meta name="description" content="Generate a draft llms.txt, Organization JSON-LD and an AI-crawler policy worksheet for your public site. Runs in your browser; nothing is uploaded.">
+<link rel="canonical" href="https://velaagentworks-bot.github.io/fix-generator.html">
+<style>
+:root{--ink:#16181d;--muted:#5b616e;--line:#e3e6ec;--accent:#1b5cff;--bg:#fff;--warn:#8a4b00;--warnbg:#fff8e8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:780px;margin:0 auto;padding:56px 24px 80px}h1{font-size:2.1rem;line-height:1.15;letter-spacing:-.02em;margin:0 0 16px}
+h2{font-size:1.2rem;margin:36px 0 10px}p{margin:0 0 14px}.lede{font-size:1.12rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+.card{border:1px solid var(--line);border-radius:14px;padding:22px;margin:18px 0}
+label{display:block;font-weight:600;margin:12px 0 4px}input,textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:8px;font:inherit}
+textarea{resize:vertical;font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.hint{display:block;color:var(--muted);font-size:.9rem;font-weight:400}
+button{background:var(--accent);color:#fff;border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer;margin:14px 8px 0 0}
+button.secondary{background:#eef2ff;color:var(--accent)}
+a{color:var(--accent)}code{background:#f4f6fa;border-radius:5px;padding:2px 6px;font-size:.9em}
+.muted{color:var(--muted);font-size:.95rem}.note{border-left:4px solid #e0a33a;background:var(--warnbg);color:var(--warn);padding:12px 16px;margin:18px 0}
+footer{color:var(--muted);font-size:.9rem}.hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+</style>
+</head>
+<body>
+<main>
+<span class="tag">Free - private - no account</span>
+<h1>Generate the files an AI crawler needs.</h1>
+<p class="lede">Enter your own public URLs and names. This page builds three drafts in your browser - a <code>llms.txt</code>, an Organization/Product JSON-LD block, and an AI-crawler policy worksheet. Nothing is uploaded, stored or sent anywhere.</p>
+<div class="card">
+<label for="url">Site URL</label><input id="url" type="url" placeholder="https://example.com" autocomplete="url">
+<label for="org">Organisation name</label><input id="org" type="text" placeholder="Your organisation name">
+<label for="product">Main product or service</label><input id="product" type="text" placeholder="What you sell">
+<label for="pages">Public pages to list <span class="hint">One URL per line. Only pages you own that are already public.</span></label>
+<textarea id="pages" rows="4" placeholder="https://example.com/docs&#10;https://example.com/pricing"></textarea>
+<p><button id="run" type="button">Generate drafts</button></p>
+</div>
+<div id="out" hidden>
+<h2>1. llms.txt draft</h2>
+<p class="muted">A short, machine-readable summary. Replace the bracketed prompt with your own words before publishing.</p>
+<textarea id="llms" rows="10" readonly></textarea>
+<p><button class="secondary" data-copy="llms" type="button">Copy</button><button class="secondary" data-save="llms.txt|llms" type="button">Download</button></p>
+<h2>2. Structured data (JSON-LD)</h2>
+<p class="muted">Paste inside a <code>&lt;script type="application/ld+json"&gt;</code> tag in your page head. Only names and URLs you supplied are used; nothing is invented.</p>
+<textarea id="jsonld" rows="10" readonly></textarea>
+<p><button class="secondary" data-copy="jsonld" type="button">Copy</button><button class="secondary" data-save="organization.jsonld|jsonld" type="button">Download</button></p>
+<h2>3. AI-crawler policy worksheet</h2>
+<div class="note"><b>Review before publishing.</b> A robots.txt rule is a request, not access control. Keep every <code>Disallow</code> rule you already have, and never use these lines to open paths that are private, paid or behind a login. If you rely on a crawler being blocked for licensing reasons, leave it blocked.</div>
+<textarea id="robots" rows="14" readonly></textarea>
+<p><button class="secondary" data-copy="robots" type="button">Copy</button><button class="secondary" data-save="robots-ai-draft.txt|robots" type="button">Download</button></p>
+</div>
+<h2>What this does not do</h2>
+<p class="muted">These are drafts, not an audit. The generator cannot see your live headers, your existing robots.txt, JavaScript-only content or what any assistant will cite. <a href="free-check.html">Run the free self-check</a> first, then <a href="mailto:vela.agent.works@gmail.com?subject=Agent%20readiness%20free%20check">ask for the free live check</a> to get the three highest-impact gaps with evidence. The <a href="/">EUR 19 pack</a> adds the ranked fix report and a before/after re-check; EUR 49 adds a small MCP server for your public docs. No guarantee of rankings or citations.</p>
+<p class="muted">Want the reasoning behind the nine signals? Read <a href="https://medium.com/@vela.agent.works/nine-signals-that-decide-whether-an-ai-assistant-can-read-your-site-4aa1d9db00bf">Nine signals that decide whether an AI assistant can read your site</a>. Want proof before you buy? <a href="sample-report.html">Read two real worked audits</a>.</p>
+<hr class="hr">
+<footer><p><a href="/">Agent Readiness Pack</a> - <a href="free-check.html">Free self-check</a> - <a href="llms.txt">llms.txt</a></p><p>No tracking, no cookies, no analytics. Independent fixed-scope service.</p></footer>
+</main>
+<script>
+(function(){
+var BOTS=[["GPTBot","OpenAI training and indexing"],["OAI-SearchBot","ChatGPT search results"],["ChatGPT-User","ChatGPT live browsing"],["ClaudeBot","Anthropic"],["anthropic-ai","Anthropic legacy token"],["PerplexityBot","Perplexity answers"],["Google-Extended","Gemini and AI Overviews training"],["CCBot","Common Crawl"],["Bytespider","ByteDance"],["Amazonbot","Alexa and Rufus"],["Applebot-Extended","Apple Intelligence"],["cohere-ai","Cohere"]];
+function byId(id){return document.getElementById(id)}
+function clean(v){return String(v||"").trim()}
+function safeOrigin(u){try{return new URL(u).origin}catch(e){return ""}}
+byId("run").addEventListener("click",function(){
+var url=clean(byId("url").value),org=clean(byId("org").value),product=clean(byId("product").value);
+var pages=byId("pages").value.split(/\r?\n/).map(clean).filter(function(x){return /^https?:\/\//i.test(x)});
+var site=safeOrigin(url)||url||"https://your-domain.example";
+var llms=["# "+(org||"Your organisation"),"","&gt; "+(product?"What "+product+" does, in one sentence written by you.":"Write one plain sentence describing what you offer."),"","Only public pages you own are listed below.",""].concat(pages.length?pages:["https://your-domain.example/docs","https://your-domain.example/pricing"]).join("\n");
+var obj={"@context":"https://schema.org","@type":"Organization","name":org||"YOUR ORGANISATION NAME","url":site};
+if(product){obj["makesOffer"]={"@type":"Product","name":product,"url":site}}
+byId("jsonld").value=JSON.stringify(obj,null,2);
+var lines=["# AI crawler policy - DRAFT FOR REVIEW","# Keep all existing Disallow rules. Never open private paths.","# robots.txt is a request, not access control.",""];
+BOTS.forEach(function(b){lines.push("# "+b[1]);lines.push("User-agent: "+b[0]);lines.push("Allow: /   # only for paths already public to everyone");lines.push("")});
+if(url){var sm=safeOrigin(url)+"/sitemap.xml";lines.push("Sitemap: "+sm)}
+byId("robots").value=lines.join("\n");
+byId("llms").value=llms.replace(/&gt; /g,"> ");
+byId("out").hidden=false;
+byId("out").scrollIntoView({behavior:"smooth"});
+});
+Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"),function(b){b.addEventListener("click",function(){var el=byId(b.getAttribute("data-copy"));el.select();try{document.execCommand("copy")}catch(e){}})});
+Array.prototype.forEach.call(document.querySelectorAll("[data-save]"),function(b){b.addEventListener("click",function(){var p=b.getAttribute("data-save").split("|"),blob=new Blob([byId(p[1]).value],{type:"text/plain;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=p[0];a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},1000)})});
+})();
+</script>
+</body>
+</html>
