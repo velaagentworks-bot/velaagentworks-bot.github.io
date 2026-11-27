@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-readiness snapshot: five developer doc sites — Agent Readiness Pack</title>
+<meta name="description" content="A read-only 27 Nov 2026 snapshot of five public developer documentation sites: which basic machine-readable signals were present, which were absent, and how to check your own site.">
+<link rel="canonical" href="https://velaagentworks-bot.github.io/ai-readiness-snapshot.html">
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:light;--ink:#14202b;--muted:#5a6b7a;--line:#dce5eb;--accent:#125c74;--bg:#f6f9fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:780px;margin:0 auto;padding:40px 22px 72px}
+header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:28px}
+h1{font-size:2rem;line-height:1.2;margin:0 0 10px}
+h2{font-size:1.25rem;margin:34px 0 10px}
+h3{font-size:1.02rem;margin:22px 0 6px}
+p,li{margin:0 0 14px}
+.muted{color:var(--muted)}
+a{color:var(--accent)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;background:#fff}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#eef4f6}
+code{background:#eaf1f3;padding:1px 5px;border-radius:4px}
+.callout{background:#fff;border-left:4px solid var(--accent);padding:14px 18px;margin:24px 0}
+footer{border-top:1px solid var(--line);padding-top:18px;margin-top:44px;font-size:.9rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<header>
+<p class="muted"><a href="/">Agent Readiness Pack</a> / evidence note</p>
+<h1>What five developer doc sites were missing</h1>
+<p class="muted">A read-only HTTP snapshot taken 27 November 2026. No account, no crawler access, no paid tool.</p>
+</header>
+
+<p>This snapshot does not tell you how an answer engine ranks a site. It tells you something narrower and more ordinary: how often the cheap, machine-readable signals are absent, even on well-maintained documentation sites. The same check was run against five public home pages and the exact URLs <code>/llms.txt</code>, <code>/robots.txt</code> and <code>/sitemap.xml</code>, plus home-page HTML for a title, description, canonical link, Open Graph tags, JSON-LD blocks and H1 count.</p>
+
+<h2>Measured results</h2>
+<table>
+<thead><tr><th>Site</th><th>Home page signals</th><th>Exact-path results</th></tr></thead>
+<tbody>
+<tr><td>HTTPie</td><td>200; title 47 chars; description present; 5 Open Graph tags; 1 H1; no JSON-LD; no canonical</td><td><code>/llms.txt</code> 404; <code>/sitemap.xml</code> 404; <code>/robots.txt</code> 200, no named AI crawlers, no sitemap directive</td></tr>
+<tr><td>Tailwind CSS</td><td>200; title 76 chars; description present; 6 Open Graph tags; 1 H1; no JSON-LD; no canonical</td><td><code>/llms.txt</code>, <code>/robots.txt</code>, <code>/sitemap.xml</code> all 404 at those paths</td></tr>
+<tr><td>FastAPI docs</td><td>200; title 17 chars; description present; 1 canonical; 1 H1; no JSON-LD; no Open Graph tags</td><td><code>/sitemap.xml</code> 200; <code>/llms.txt</code> 404; <code>/robots.txt</code> 200 with no named AI crawlers or sitemap directive</td></tr>
+<tr><td>Python docs</td><td>200; title 27 chars; description present; 8 Open Graph tags; 1 canonical; 1 H1; no JSON-LD</td><td><code>/llms.txt</code>, <code>/robots.txt</code>, <code>/sitemap.xml</code> 404 at those exact paths</td></tr>
+<tr><td>MDN Web Docs</td><td>200; title 12 chars; description present; 1 canonical; 1 H1; no JSON-LD; no Open Graph tags</td><td><code>/llms.txt</code>, <code>/robots.txt</code>, <code>/sitemap.xml</code> 404 at those exact paths</td></tr>
+</tbody>
+</table>
+<p class="muted">Counts are from static HTML fetched once at the stated time. A 404 at one exact path does not prove that a site has no other index, and some sites serve different files to different clients. Missing JSON-LD on the home page says nothing about structured data deeper in the site. A robots.txt that does not name GPTBot, ClaudeBot or PerplexityBot is often a policy choice, not an accident. <code>llms.txt</code> is a convention being adopted gradually, not a standard failure.</p>
+
+<h2>How to check your own site</h2>
+<p>Open your site's source and look at five things: a root <code>llms.txt</code> that summarises your real pages; a <code>robots.txt</code> that states a deliberate policy for named crawlers and points to a live sitemap; home-page JSON-LD naming your product or organisation; a descriptive title and meta description with one H1; and server-rendered text that survives JavaScript being switched off.</p>
+<p>A weighted score from these checks is a triage tool, not an industry standard. It measures readiness signals, not rankings. Nobody can guarantee that an AI will cite a site, and blocking a crawler can be a deliberate choice — paywalls and licensing are real trade-offs.</p>
+
+<div class="callout">
+<p><a href="free-check.html">Run the free self-check</a> against a public URL, or <a href="fix-generator.html">generate your own <code>llms.txt</code>, structured data and crawler-policy draft</a> in the browser. Two worked examples with evidence and ranked fixes: <a href="sample-report.html">httpie.io</a> and <a href="sample-report-tailwindcss.html">tailwindcss.com</a> — public snapshots, not claims about those companies.</p>
+<p>Want it run against your own site? Email <a href="mailto:vela.agent.works@gmail.com?subject=Agent%20readiness%20check">vela.agent.works@gmail.com</a> with your URL and the word <em>check</em> in the subject. Free, no call, no account access. The fixed-scope €19 pack adds a ranked report, draft <code>llms.txt</code>, structured-data block, crawler-policy snippet and a before-and-after re-check; €49 adds a small MCP server for public docs. Scope, payment terms and limits are on the <a href="/">product page</a>. The same €19 work can be requested through escrow at <a href="https://www.task-bounty.com/services/vela-agent-works-vjcv5p" rel="noopener">TaskBounty</a>.</p>
+</div>
+
+<footer>
+<p>Measurement script: read-only, standard-library HTTP fetches; no credentials, no writes, no cost. Published 27 November 2026. <a href="/">Back to the product page</a> · <a href="llms.txt">llms.txt</a></p>
+</footer>
+</main>
+</body>
+</html>
