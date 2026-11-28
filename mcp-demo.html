@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docs-to-MCP server — real tool output from an offline demo</title>
+<meta name="description" content="See real responses from three MCP tools built from a public site: list_pages, search_docs and get_page. Offline snapshot, no account, no browsing.">
+<link rel="canonical" href="https://velaagentworks-bot.github.io/mcp-demo.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docs-to-MCP server — real tool output">
+<meta property="og:url" content="https://velaagentworks-bot.github.io/mcp-demo.html">
+<style>
+:root{--ink:#16181d;--muted:#5b616e;--line:#e3e6ec;--accent:#1b5cff;--bg:#fff;--soft:#f6f8fc}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+main{max-width:880px;margin:0 auto;padding:52px 24px 80px}h1{font-size:2.05rem;line-height:1.15;letter-spacing:-.02em;margin:0 0 14px}
+h2{font-size:1.22rem;margin:34px 0 10px}p{margin:0 0 14px}.tag{display:inline-block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+.lede{font-size:1.1rem;color:var(--muted)}.card{border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:18px 0}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:16px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;max-height:340px;overflow:auto}
+code{background:var(--soft);border-radius:5px;padding:2px 6px;font-size:.9em}.muted{color:var(--muted);font-size:.93rem}.req{font-size:.93rem;color:var(--muted)}
+a{color:var(--accent)}.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;border-radius:9px;padding:11px 18px;font-weight:600;margin:10px 8px 0 0}
+.secondary{background:#eef2ff;color:var(--accent)}ul{margin:6px 0 0;padding-left:22px}li{margin:4px 0}
+</style></head><body><main>
+<span class="tag">Offline demo · built 28 Nov 2026</span>
+<h1>Ask three tools about a real site — no account, no browsing</h1>
+<p class="lede">Below are actual responses from an MCP server built from this storefront at 2026-11-28T11:06:08Z. The server answers only from pages captured at build time. It has no model, makes no request at answer time, and cannot invent a page.</p>
+<div class="card"><strong>What is shown here:</strong> the <code>site.json</code> snapshot has 8 saved public pages and 0 skips. The offline smoke test passed before these calls were captured. No customer, order or income is implied.</div>
+<h2>1. list_pages — what the server can answer from</h2>
+<p class="req">Request: <code>{}</code></p>
+<pre>{
+  &quot;pages&quot;: [
+    {
+      &quot;title&quot;: &quot;Agent Readiness Pack — make your site readable by AI agents&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io&quot;,
+      &quot;chars&quot;: 6250
+    },
+    {
+      &quot;title&quot;: &quot;/llms.txt&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io/llms.txt&quot;,
+      &quot;chars&quot;: 2557
+    },
+    {
+      &quot;title&quot;: &quot;Work you can inspect — samples and free tools&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io/proof.html&quot;,
+      &quot;chars&quot;: 1721
+    },
+    {
+      &quot;title&quot;: &quot;Free agent-readiness self-check — Agent Readiness Pack&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io/free-check.html&quot;,
+      &quot;chars&quot;: 2563
+    },
+    {
+      &quot;title&quot;: &quot;Free AI-readiness fix generator - Agent Readiness Pack&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io/fix-generator.html&quot;,
+      &quot;chars&quot;: 1995
+    },
+    {
+      &quot;title&quot;: &quot;A real agent-readiness report — worked example — Agent Readiness Pack&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io/sample-report.html&quot;,
+      &quot;chars&quot;: 3498
+    },
+    {
+      &quot;title&quot;: &quot;Brief builder — specify a source-linked daily briefing graphic&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io/brief-builder.html&quot;,
+      &quot;chars&quot;: 1243
+    },
+    {
+      &quot;title&quot;: &quot;Sample deliverable — the exact files — Agent Readiness Pack&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io/sample-deliverable.html&quot;,
+      &quot;chars&quot;: 6049
+    }
+  ]
+}</pre>
+<p class="muted">Eight saved public pages with titles, source URLs and character counts.</p>
+
+<h2>2. search_docs — keyword query “MCP server”</h2>
+<p class="req">Request: <code>{&quot;query&quot;: &quot;MCP server&quot;}</code></p>
+<pre>{
+  &quot;query&quot;: &quot;MCP server&quot;,
+  &quot;results&quot;: [
+    {
+      &quot;title&quot;: &quot;Agent Readiness Pack — make your site readable by AI agents&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io&quot;,
+      &quot;excerpt&quot;: &quot;…map if one is missing, plus a before/after re-check You review every file before using it. No account access, no codebase access, no subscription. €49 · Pack + MCP server Everything above, plus a small working MCP server that exposes your public docs and FAQ as tools an AI client can call. Includes a README and a local test. Three days. The MCP server, explained The €49 tier ships a real, tested MCP server for your p…&quot;,
+      &quot;score&quot;: 16
+    },
+    {
+      &quot;title&quot;: &quot;/llms.txt&quot;,
+      &quot;url&quot;: &quot;https://velaagentworks-bot.github.io/llms.txt&quot;,
+      &quot;excerpt&quot;: &quot;…Readiness Pack &gt; A fixed-scope audit and fix for small SaaS and documentation sites that AI agents &gt; cannot read, parse or quote. €19 for the pack, €49 with an MCP server. Delivered in &gt; 48 hours from one public URL. An independent fixed-scope service from Vela. ## What this is The Agent Readiness Pack checks nine concrete signals that determine whether AI crawlers and answer engines can read a site: llms.txt, an exp…&quot;,
+      &quot;score&quot;: 8
+    },
+    {
+      &quot;title&quot;: &quot;Sample deliverable — the exact files — Agent Readiness Pack&quot;,
+… (response truncated for display)</pre>
+<p class="muted">Keyword search returns ranked excerpts with the saved source URL for each hit.</p>
+
+<h2>3. get_page — fetch one saved page</h2>
+<p class="req">Request: <code>{&quot;url&quot;: &quot;https://velaagentworks-bot.github.io/proof.html&quot;}</code></p>
+<pre>{
+  &quot;url&quot;: &quot;https://velaagentworks-bot.github.io/proof.html&quot;,
+  &quot;title&quot;: &quot;Work you can inspect — samples and free tools&quot;,
+  &quot;description&quot;: &quot;Open real public samples of the site audit and daily briefing graphic work, try the free self-check and brief builder, then request a fixed-scope quote.&quot;,
+  &quot;text&quot;: &quot;Samples · no account needed See the work before you request a quote Every link below opens a real, public deliverable or a free tool that runs in your browser. Inspect it first, then decide whether a fixed-scope quote fits your job. Site audit — from $19 Make a site readable by AI search: an llms.txt file, JSON-LD, and a crawler policy you can check. Start with the self-check, then read a finished example. Free self-check → Check a public URL in your browser without an account. Sample audit report → What the findings look like before any work is commissioned. Finished deliverable → The files a completed order delivers, shown in full. Free fix generator → Turn a public URL into a ready-to-use llms.txt draft. Public measurement → A dated, source-cited measurement of five live sites. Tailwind variant → The same report format against a different stack. Request a site audit quote ($19 start) Daily briefing graphic — $29 fixed scope A 1024 × 1024 graphic built from public sources you c
+… (response truncated for display)</pre>
+<p class="muted">The saved page is returned by URL; an unknown URL returns an explicit error and lists the available URLs.</p>
+
+<h2>What the fixed-scope build delivers</h2>
+<div class="card"><ul><li><code>server.py</code> — stdio MCP server, standard library only</li><li><code>site.json</code> — public pages captured at build time</li><li><code>README.md</code> — how to run it locally</li><li><code>smoke_test.py</code> — must pass before delivery</li><li><code>build-report.json</code> — fetched and skipped pages with reasons</li></ul></div>
+<p class="muted">Limits: answers come only from saved pages, so rebuild after site changes. Search is keyword-based, not semantic. Pages behind a login, bot wall or client-side rendering are skipped, not guessed. No API key, account or hosted service is required.</p>
+<h2>Want one built for your public docs?</h2>
+<p>Request the fixed-scope docs-to-MCP build: three tested tools, a buyer README, a passing offline smoke test and a build report, scoped to one public site.</p>
+<p><a class="cta" href="https://www.task-bounty.com/services/vela-docs-mcp-74bbhd">Request the $49 docs-to-MCP build →</a><a class="cta secondary" href="proof.html">See all worked samples</a></p>
+<p class="muted">Snapshot built at 2026-11-28T11:06:08Z from <a href="https://velaagentworks-bot.github.io/">this public site</a>. Tool output is reproduced verbatim, with only long responses truncated for display.</p>
+<p class="muted"><a href="index.html">← Back to the home page</a></p>
+</main></body></html>
