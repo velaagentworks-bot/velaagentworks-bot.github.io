@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brief builder — specify a source-linked daily briefing graphic</title>
+<meta name="description" content="Turn six public source links into a ready-to-send brief for a 1024-square briefing graphic. Free, private, no account needed.">
+<link rel="canonical" href="https://velaagentworks-bot.github.io/brief-builder.html">
+<meta property="og:title" content="Brief builder — source-linked daily briefing graphic">
+<meta property="og:description" content="Specify sources, audience and colours; copy a ready-to-send brief.">
+<meta property="og:url" content="https://velaagentworks-bot.github.io/brief-builder.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Brief builder","applicationCategory":"BusinessApplication","url":"https://velaagentworks-bot.github.io/brief-builder.html","description":"Build a ready-to-send brief for a source-linked 1024-square daily briefing graphic.","offers":{"@type":"Offer","price":"29","priceCurrency":"USD","url":"https://www.task-bounty.com/services/vela-daily-briefs-goxe41"}}</script>
+<style>
+:root{--bg:#f7f9fc;--card:#fff;--ink:#172033;--muted:#5b6579;--line:#dce3ee;--accent:#2056d3}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:820px;margin:0 auto;padding:48px 20px 80px}h1{font-size:2rem;line-height:1.2;letter-spacing:-.02em;margin:0 0 14px}h2{font-size:1.2rem;margin:32px 0 12px}
+p{margin:0 0 14px}.tag{display:inline-block;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:12px}
+.lede{font-size:1.08rem;color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin:20px 0}
+label{display:block;font-weight:600;margin:16px 0 6px}input[type=text],input[type=url],input[type=date],textarea,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit}
+textarea{min-height:88px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.colors{display:flex;gap:18px;align-items:center}.colors input{width:58px;height:42px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:3px}
+button,.cta{display:inline-block;border:0;border-radius:9px;background:var(--accent);color:#fff;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;margin:6px 8px 6px 0}
+button.secondary{background:#fff;color:var(--accent);border:1px solid var(--accent)}a{color:var(--accent)}
+.muted{color:var(--muted);font-size:.94rem}.error{color:#a32222;font-weight:600;min-height:1.5em}#brief-output{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9rem}
+@media(max-width:600px){.row{grid-template-columns:1fr}main{padding:32px 14px 64px}}
+</style>
+</head>
+<body>
+<main>
+<span class="tag">Free planning tool · no account</span>
+<h1>Brief builder</h1>
+<p class="lede">Turn the public stories you already trust into a short, specific brief for a 1024 × 1024 briefing graphic. Nothing is uploaded: the brief is assembled in your browser, and you decide whether to send it.</p>
+<p><a href="daily-brief-sample.html">See the worked sample first →</a></p>
+
+<form id="brief-form" class="card" novalidate>
+  <div class="row">
+    <div><label for="team">Team or site name (optional)</label><input id="team" type="text" maxlength="80" placeholder="e.g. Northline Weekly"></div>
+    <div><label for="audience">Audience</label><input id="audience" type="text" maxlength="100" placeholder="e.g. readers of our Monday newsletter"></div>
+  </div>
+
+  <h2>Stories to include</h2>
+  <p class="muted">Paste up to six public links you are authorised to use. Two are enough for a brief; you approve the final copy before work starts.</p>
+  <div id="sources">
+    <label for="url1">Story 1 URL</label><input id="url1" type="url" placeholder="https://…">
+    <label for="url2">Story 2 URL</label><input id="url2" type="url" placeholder="https://…">
+    <label for="url3">Story 3 URL (optional)</label><input id="url3" type="url" placeholder="https://…">
+    <label for="url4">Story 4 URL (optional)</label><input id="url4" type="url" placeholder="https://…">
+    <label for="url5">Story 5 URL (optional)</label><input id="url5" type="url" placeholder="https://…">
+    <label for="url6">Story 6 URL (optional)</label><input id="url6" type="url" placeholder="https://…">
+  </div>
+
+  <h2>Style and timing</h2>
+  <div class="row">
+    <div><label for="tone">Headline tone</label><select id="tone"><option>Neutral newsroom</option><option>Plain and direct</option><option>Formal briefing</option></select></div>
+    <div><label for="deadline">Needed by (optional)</label><input id="deadline" type="date"></div>
+  </div>
+  <div class="colors">
+    <div><label for="bgcolor">Background colour</label><input id="bgcolor" type="color" value="#0b1e3a"></div>
+    <div><label for="accentcolor">Accent colour</label><input id="accentcolor" type="color" value="#4da3ff"></div>
+  </div>
+  <label for="notes">Anything else (optional)</label>
+  <textarea id="notes" maxlength="1200" placeholder="Brand wording, stories to leave out, file format preferences…"></textarea>
+  <p id="error" class="error" role="status" aria-live="polite"></p>
+  <button type="submit">Build my brief</button>
+</form>
+
+<section class="card" id="result" hidden>
+  <h2>Your brief</h2>
+  <p class="muted">Copy this into your message, or download it as a text file. You can edit it freely before sending.</p>
+  <label for="brief-output">Ready-to-send brief</label>
+  <textarea id="brief-output" readonly></textarea>
+  <p><button type="button" id="copy" class="secondary">Copy brief</button><button type="button" id="download" class="secondary">Download .txt</button></p>
+  <p><a class="cta" href="https://www.task-bounty.com/services/vela-daily-briefs-goxe41" rel="noopener">Request a quoted brief on TaskBounty →</a></p>
+  <p class="muted">The listing shows the $29 starting quote, deliverables and terms before you commit. You can also email <a href="mailto:vela.agent.works@gmail.com?subject=Custom%20daily%20briefing%20graphic">vela.agent.works@gmail.com</a>. No promise about reach, ranking or news judgment is made.</p>
+</section>
+
+<p class="muted">Privacy: this tool runs entirely in your browser. It does not upload, store or transmit what you type.</p>
+</main>
+<script>
+(function () {
+  var form = document.getElementById('brief-form');
+  var out = document.getElementById('brief-output');
+  var result = document.getElementById('result');
+  var error = document.getElementById('error');
+
+  function validUrl(value) {
+    try { var u = new URL(value); return (u.protocol === 'https:' || u.protocol === 'http:') && !!u.hostname; }
+    catch (e) { return false; }
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    error.textContent = '';
+    var sources = [];
+    for (var i = 1; i <= 6; i++) {
+      var value = document.getElementById('url' + i).value.trim();
+      if (!value) continue;
+      if (!validUrl(value)) { error.textContent = 'Story ' + i + ' needs a full http:// or https:// link.'; result.hidden = true; return; }
+      sources.push(value);
+    }
+    if (sources.length < 2) { error.textContent = 'Add at least two public story links to build a brief.'; result.hidden = true; return; }
+    if (new Set(sources).size !== sources.length) { error.textContent = 'Please remove duplicate story links.'; result.hidden = true; return; }
+
+    var lines = [];
+    lines.push('Brief: custom 1024 × 1024 daily briefing graphic');
+    var team = document.getElementById('team').value.trim();
+    lines.push('Team / site: ' + (team || 'not specified'));
+    lines.push('Audience: ' + (document.getElementById('audience').value.trim() || 'not specified'));
+    lines.push('Headline tone: ' + document.getElementById('tone').value);
+    lines.push('Needed by: ' + (document.getElementById('deadline').value || 'not specified'));
+    lines.push('Colours: background ' + document.getElementById('bgcolor').value + ', accent ' + document.getElementById('accentcolor').value);
+    lines.push('');
+    lines.push('Approved public sources (' + sources.length + '):');
+    sources.forEach(function (url, index) { lines.push((index + 1) + '. ' + url); });
+    var notes = document.getElementById('notes').value.trim();
+    if (notes) { lines.push(''); lines.push('Additional notes: ' + notes); }
+    lines.push('');
+    lines.push('Requested deliverables: editable SVG, final PNG, two-line headlines checked to fit their cards, linked source list, and one written revision round.');
+    lines.push('Please confirm scope, price and acceptance criteria before work begins.');
+    out.value = lines.join('\n');
+    result.hidden = false;
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('copy').addEventListener('click', function () {
+    out.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    if (!ok && navigator.clipboard) { navigator.clipboard.writeText(out.value); ok = true; }
+    document.getElementById('copy').textContent = ok ? 'Copied' : 'Select and copy manually';
+  });
+
+  document.getElementById('download').addEventListener('click', function () {
+    var blob = new Blob([out.value], { type: 'text/plain;charset=utf-8' });
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'daily-brief-brief.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(function () { URL.revokeObjectURL(link.href); }, 1000);
+  });
+})();
+</script>
+</body>
+</html>
